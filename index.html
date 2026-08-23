@@ -1,0 +1,417 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Personal research site of Carlos Serra Traynor — Bayesian modelling, pharmacometrics, and AI/ML research, software, and publications.">
+  <meta name="color-scheme" content="light dark">
+  <link rel="canonical" href="https://csetraynor.github.io/">
+  <title>Carlos Serra Traynor — Quantitative Scientist</title>
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="profile">
+  <meta property="og:title" content="Carlos Serra Traynor — Quantitative Scientist">
+  <meta property="og:description" content="Bayesian modelling, pharmacometrics, and AI/ML research, software, and publications.">
+  <meta property="og:url" content="https://csetraynor.github.io/">
+  <meta property="og:site_name" content="Carlos Serra Traynor">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Carlos Serra Traynor — Quantitative Scientist">
+  <meta name="twitter:description" content="Bayesian modelling, pharmacometrics, and AI/ML research, software, and publications.">
+  <meta name="twitter:site" content="@CSerra91">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Carlos Serra Traynor",
+    "jobTitle": "Quantitative Scientist",
+    "description": "Quantitative scientist working on Bayesian modelling, clinical pharmacology, and AI & machine learning.",
+    "url": "https://csetraynor.github.io/",
+    "email": "mailto:carlos.traynor.qcp@gmail.com",
+    "sameAs": [
+      "https://github.com/csetraynor",
+      "https://x.com/CSerra91",
+      "https://www.linkedin.com/in/carlos-serra-traynor/",
+      "https://orcid.org/0000-0002-3753-7552",
+      "https://scholar.google.com/citations?user=WjwRvO8AAAAJ&hl=en"
+    ],
+    "alumniOf": [
+      { "@type": "CollegeOrUniversity", "name": "University of Warwick" },
+      { "@type": "CollegeOrUniversity", "name": "University of Barcelona" }
+    ]
+  }
+  </script>
+
+  <style>
+    :root {
+      --bg: #fbfbfa;
+      --surface: #ffffff;
+      --text: #1d1d1f;
+      --text-lead: #383838;
+      --muted: #686868;
+      --line: #dededb;
+      --accent: #2457a6;
+      --accent-contrast: #ffffff;
+      --focus: #b3560c;
+      --max: 900px;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        --bg: #16171a;
+        --surface: #1d1e22;
+        --text: #eeeeef;
+        --text-lead: #d3d3d6;
+        --muted: #9a9aa0;
+        --line: #33343a;
+        --accent: #7aa7e6;
+        --accent-contrast: #10131c;
+        --focus: #ffb454;
+      }
+    }
+    :root[data-theme="dark"] {
+      --bg: #16171a;
+      --surface: #1d1e22;
+      --text: #eeeeef;
+      --text-lead: #d3d3d6;
+      --muted: #9a9aa0;
+      --line: #33343a;
+      --accent: #7aa7e6;
+      --accent-contrast: #10131c;
+      --focus: #ffb454;
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      * { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      line-height: 1.65;
+    }
+
+    .wrap { max-width: var(--max); margin: 0 auto; padding-left: 28px; padding-right: 28px; }
+
+    .skip-link {
+      position: absolute; left: -9999px; top: 0; z-index: 100;
+      background: var(--accent); color: var(--accent-contrast);
+      padding: 12px 18px; border-radius: 0 0 6px 0; font-size: 14px; font-weight: 600;
+    }
+    .skip-link:focus {
+      left: 0;
+    }
+
+    a { color: inherit; text-decoration: none; border-bottom: 1px solid transparent; }
+    a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+    a:focus-visible,
+    button:focus-visible {
+      outline: 2px solid var(--focus);
+      outline-offset: 3px;
+      border-radius: 2px;
+    }
+
+    nav {
+      display: flex; justify-content: space-between; align-items: center;
+      padding-top: 24px; padding-bottom: 24px; border-bottom: 1px solid var(--line);
+      font-size: 14px;
+    }
+    nav .name { font-weight: 650; }
+    nav .links { display: flex; gap: 20px; flex-wrap: wrap; }
+
+    .hero { padding: 86px 0 72px; }
+    .eyebrow {
+      color: var(--accent); font-size: 13px; font-weight: 700;
+      letter-spacing: .09em; text-transform: uppercase;
+    }
+    h1 {
+      font-size: clamp(38px, 6.5vw, 60px); line-height: 1.08;
+      letter-spacing: -.04em; margin: 14px 0 22px; max-width: 780px;
+    }
+    .lead {
+      font-size: clamp(19px, 2.5vw, 23px); line-height: 1.45;
+      max-width: 700px; color: var(--text-lead);
+    }
+    .hero-links {
+      margin-top: 30px; display: flex; flex-wrap: wrap; gap: 10px 22px; font-size: 15px;
+    }
+    .hero-links a { font-weight: 600; }
+
+    section { padding: 58px 0; border-top: 1px solid var(--line); }
+    section > h2:first-child,
+    section > .section-head { margin-top: 0; }
+    h2 { font-size: 24px; letter-spacing: -.02em; margin: 0 0 24px; }
+    h3 { font-size: 17px; margin: 0 0 6px; }
+    p { margin: 0 0 16px; }
+    p:last-child { margin-bottom: 0; }
+
+    .prose { max-width: 680px; }
+    .prose p { color: var(--text-lead); }
+
+    .work-list {
+      display: grid; gap: 26px;
+    }
+    .work-item {
+      display: grid; grid-template-columns: 1fr auto; gap: 8px 20px;
+      align-items: baseline; padding-bottom: 22px; border-bottom: 1px solid var(--line);
+    }
+    .work-item:last-child { border-bottom: 0; padding-bottom: 0; }
+    .work-item h3 { grid-column: 1; }
+    .work-item .work-link { grid-column: 2; grid-row: 1; font-size: 14px; font-weight: 600; white-space: nowrap; }
+    .work-item p { grid-column: 1 / -1; color: var(--muted); font-size: 15px; max-width: 640px; }
+    .contrib-note { margin-top: 8px; color: var(--muted); font-size: 14px; }
+
+    .publication {
+      padding: 18px 0; border-top: 1px solid var(--line);
+    }
+    .publication:first-of-type { border-top: 0; padding-top: 0; }
+    .pub-title { font-weight: 600; }
+    .pub-meta { color: var(--muted); font-size: 14px; margin-top: 5px; }
+    .pub-link { font-size: 14px; font-weight: 600; display: inline-block; margin-top: 6px; }
+    .pub-note { margin-top: 22px; color: var(--muted); font-size: 14px; }
+
+    .skills-grid {
+      display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px 40px;
+    }
+    .skill-group h3 { margin-bottom: 10px; }
+    .pill-list { display: flex; flex-wrap: wrap; gap: 8px; }
+    .pill {
+      border: 1px solid var(--line); border-radius: 999px;
+      padding: 5px 12px; font-size: 13px; color: var(--text-lead);
+      background: var(--surface);
+    }
+
+    .contact-grid {
+      display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px 40px;
+    }
+    .contact-grid h3 { margin-bottom: 8px; }
+    .contact-grid p { margin: 0; }
+    .contact-grid a { display: inline-block; padding: 3px 0; }
+
+    footer {
+      border-top: 1px solid var(--line); padding: 32px 0 55px;
+      color: var(--muted); font-size: 13px;
+    }
+    footer .disclaimer { margin: 0 0 10px; max-width: 620px; }
+    footer .copyright { margin: 0; }
+
+    @media (max-width: 650px) {
+      .wrap { padding-left: 20px; padding-right: 20px; }
+      nav .links { gap: 14px; font-size: 13px; }
+      .hero { padding: 54px 0 46px; }
+      .skills-grid, .contact-grid { grid-template-columns: 1fr; gap: 24px; }
+      .work-item { grid-template-columns: 1fr; }
+      .work-item .work-link { grid-column: 1; grid-row: auto; }
+    }
+  </style>
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <nav class="wrap" aria-label="Section navigation">
+      <div class="name">Carlos Serra Traynor</div>
+      <div class="links">
+        <a href="#about">About</a>
+        <a href="#work">Work</a>
+        <a href="#publications">Publications</a>
+        <a href="#skills">Skills</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main" class="wrap">
+    <div class="hero">
+      <p class="eyebrow">Quantitative Science · Bayesian Modelling · AI &amp; Machine Learning</p>
+      <h1>Building Bayesian intelligence for better decisions.</h1>
+      <p class="lead">
+        Research at the intersection of Bayesian modelling, clinical pharmacology,
+        and AI/ML — quantitative methods for decision-making under uncertainty.
+      </p>
+      <div class="hero-links">
+        <a href="https://github.com/csetraynor" rel="me noopener" target="_blank">GitHub ↗</a>
+        <a href="https://www.linkedin.com/in/carlos-serra-traynor/" rel="me noopener" target="_blank">LinkedIn ↗</a>
+        <a href="https://orcid.org/0000-0002-3753-7552" rel="me noopener" target="_blank">ORCID ↗</a>
+      </div>
+    </div>
+
+    <section id="about" aria-labelledby="about-heading">
+      <h2 id="about-heading">About</h2>
+      <div class="prose">
+        <p>
+          I'm a quantitative scientist working on Bayesian modelling and
+          model-informed decision-making in complex biological systems. Over
+          the past several years I've built predictive models supporting
+          clinical development, dose optimisation, translational medicine, and
+          regulatory submissions, mostly in oncology.
+        </p>
+        <p>
+          My work combines Bayesian inference, nonlinear mixed-effects
+          modelling, simulation, and statistical computing to make
+          decisions under uncertainty more rigorous — turning noisy clinical
+          and biological data into evidence that holds up under scrutiny.
+        </p>
+        <p>
+          My interests are increasingly moving beyond drug development into
+          probabilistic machine learning and quantitative research more
+          broadly — applying the same computational habits to problems
+          outside pharma, including AI-assisted software development.
+        </p>
+      </div>
+    </section>
+
+    <section id="work" aria-labelledby="work-heading">
+      <h2 id="work-heading">Selected work</h2>
+      <div class="work-list">
+        <div class="work-item">
+          <h3>simtte</h3>
+          <a class="work-link" href="https://github.com/csetraynor/simtte" rel="noopener" target="_blank">GitHub ↗</a>
+          <p>R package for simulating bespoke time-to-event data (Weibull and spline hazards), for trial design and endpoint simulation.</p>
+        </div>
+        <div class="work-item">
+          <h3>StanFlowR</h3>
+          <a class="work-link" href="https://github.com/csetraynor/StanFlowR" rel="noopener" target="_blank">GitHub ↗</a>
+          <p>R package that orchestrates Stan and Torsten model workflows through the native CmdStan CLI, so Bayesian pharmacometric models can run on HPC and cloud compute without <code>cmdstanr</code> or <code>rstan</code>.</p>
+        </div>
+        <div class="work-item">
+          <h3>gcsf-neutropenia-kpd-model</h3>
+          <a class="work-link" href="https://github.com/csetraynor/gcsf-neutropenia-kpd-model" rel="noopener" target="_blank">GitHub ↗</a>
+          <p>Bayesian kinetic-pharmacodynamic Stan/Torsten models of neutrophil dynamics under docetaxel chemotherapy, with and without G-CSF support, presented at PAGE 2026.</p>
+        </div>
+        <div class="work-item">
+          <h3>Bayes-Joint-Model-ctDNA-PFS</h3>
+          <a class="work-link" href="https://github.com/csetraynor/Bayes-Joint-Model-ctDNA-PFS" rel="noopener" target="_blank">GitHub ↗</a>
+          <p>Stan/mrgsolve code for the joint longitudinal–survival model behind a 2024 <em>Clinical Pharmacology &amp; Therapeutics</em> paper predicting disease progression from ctDNA in EGFR-mutant NSCLC.</p>
+        </div>
+        <div class="work-item">
+          <h3>miml-synthetic</h3>
+          <a class="work-link" href="https://github.com/csetraynor/miml-synthetic" rel="noopener" target="_blank">GitHub ↗</a>
+          <p>Code for a comparative study of missing-data imputation methods (predictive mean matching, EM, random forests, GANs, tabular networks) on real-world biomarker data.</p>
+        </div>
+      </div>
+      <p class="contrib-note">I also contribute to open-source pharmacometrics tools, including forks of <a href="https://github.com/metrumresearchgroup/Torsten" rel="noopener" target="_blank">Torsten</a>, <a href="https://github.com/metrumresearchgroup/mrgsolve" rel="noopener" target="_blank">mrgsolve</a>, and <a href="https://github.com/stan-dev/projpred" rel="noopener" target="_blank">projpred</a>.</p>
+    </section>
+
+    <section id="publications" aria-labelledby="publications-heading">
+      <h2 id="publications-heading">Selected publications</h2>
+
+      <div class="publication">
+        <div class="pub-title">Imputing Biomarker Status from RWE Datasets—A Comparative Study</div>
+        <div class="pub-meta">Traynor C, Sahota T, Tomkinson H, Gonzalez-Garcia I, Evans N, Chappell M · Journal of Personalized Medicine · 2021 · 11(12):1356</div>
+        <a class="pub-link" href="https://doi.org/10.3390/jpm11121356" rel="noopener" target="_blank">doi.org/10.3390/jpm11121356 ↗</a>
+      </div>
+
+      <div class="publication">
+        <div class="pub-title">Longitudinal Circulating Tumor DNA Modeling to Predict Disease Progression in First-Line Mutant EGFR Non-Small Cell Lung Cancer</div>
+        <div class="pub-meta">Johnson M, Serra Traynor C, Vishwanathan K, Overend P, Hartmaier R, Markovets A, Chmielecki J, Mugundu GM, Barrett JC, Tomkinson H, Ramalingam SS · Clinical Pharmacology &amp; Therapeutics · 2024 · 115(2):349–360</div>
+        <a class="pub-link" href="https://doi.org/10.1002/cpt.3113" rel="noopener" target="_blank">doi.org/10.1002/cpt.3113 ↗</a>
+      </div>
+
+      <div class="publication">
+        <div class="pub-title">DeepCIM: Prediction of Myelosuppressive Anti-Cancer Molecules Using Drug–Target Interaction Datasets</div>
+        <div class="pub-meta">Lee T, Thomas P, Serra Traynor C · PAGE 32 (2024) · Abstract 11108</div>
+        <a class="pub-link" href="https://www.page-meeting.org/wp-content/uploads/pdf_abstracts/11108-abstract.pdf" rel="noopener" target="_blank">Abstract PDF ↗</a>
+      </div>
+
+      <p class="pub-note">Full record: <a href="https://scholar.google.com/citations?user=WjwRvO8AAAAJ&amp;hl=en" rel="noopener" target="_blank">Google Scholar ↗</a> · <a href="https://orcid.org/0000-0002-3753-7552" rel="noopener" target="_blank">ORCID ↗</a></p>
+    </section>
+
+    <section id="skills" aria-labelledby="skills-heading">
+      <h2 id="skills-heading">Skills</h2>
+      <div class="skills-grid">
+        <div class="skill-group">
+          <h3>Bayesian inference &amp; Stan</h3>
+          <div class="pill-list">
+            <span class="pill">Bayesian statistics</span>
+            <span class="pill">Stan</span>
+            <span class="pill">Torsten</span>
+            <span class="pill">Hierarchical models</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <h3>Nonlinear mixed-effects &amp; survival modelling</h3>
+          <div class="pill-list">
+            <span class="pill">PK/PD</span>
+            <span class="pill">NLME</span>
+            <span class="pill">Time-to-event models</span>
+            <span class="pill">mrgsolve</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <h3>Simulation &amp; uncertainty quantification</h3>
+          <div class="pill-list">
+            <span class="pill">Simulation</span>
+            <span class="pill">Uncertainty quantification</span>
+            <span class="pill">Statistical computing</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <h3>R package development, Python, Unix</h3>
+          <div class="pill-list">
+            <span class="pill">R</span>
+            <span class="pill">Python</span>
+            <span class="pill">Unix</span>
+            <span class="pill">CmdStan / HPC workflows</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <h3>Probabilistic machine learning</h3>
+          <div class="pill-list">
+            <span class="pill">Machine learning</span>
+            <span class="pill">Probabilistic ML</span>
+            <span class="pill">AI-assisted software development</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="background" aria-labelledby="background-heading">
+      <h2 id="background-heading">Background</h2>
+      <div class="prose">
+        <p>PhD, Engineering for Medical Science and Technology — University of Warwick</p>
+        <p>Pharmacy (MPharm) — University of Barcelona</p>
+      </div>
+    </section>
+
+    <section id="contact" aria-labelledby="contact-heading">
+      <h2 id="contact-heading">Find me</h2>
+      <div class="contact-grid">
+        <div>
+          <h3>Professional</h3>
+          <p>
+            <a href="https://www.linkedin.com/in/carlos-serra-traynor/" rel="me noopener" target="_blank">LinkedIn ↗</a><br>
+            <a href="https://orcid.org/0000-0002-3753-7552" rel="me noopener" target="_blank">ORCID ↗</a><br>
+            <a href="mailto:carlos.traynor.qcp@gmail.com" rel="me">carlos.traynor.qcp@gmail.com</a>
+          </p>
+        </div>
+        <div>
+          <h3>Research &amp; code</h3>
+          <p>
+            <a href="https://github.com/csetraynor" rel="me noopener" target="_blank">GitHub ↗</a><br>
+            <a href="https://scholar.google.com/citations?user=WjwRvO8AAAAJ&amp;hl=en" rel="noopener" target="_blank">Google Scholar ↗</a><br>
+            <a href="https://x.com/CSerra91" rel="me noopener" target="_blank">X (@CSerra91) ↗</a>
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p class="disclaimer">This is a personal website. Views and materials presented here are my own and do not represent those of any employer.</p>
+      <p class="copyright">© 2026 Carlos Serra Traynor · Personal research website</p>
+    </div>
+  </footer>
+</body>
+</html>
