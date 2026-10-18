@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+<title>Censoring and Realistic Assessment Schedules</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+
+<style type="text/css">
+code {
+white-space: pre;
+}
+.sourceCode {
+overflow: visible;
+}
+</style>
+<style type="text/css" data-origin="pandoc">
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+<style type="text/css">
+:root {
+--bg: #fbfbfa;
+--surface: #ffffff;
+--text: #1d1d1f;
+--muted: #686868;
+--line: #dededb;
+--accent: #2457a6;
+--code-bg: #f3f3f1;
+}
+@media (prefers-color-scheme: dark) {
+:root:not([data-theme="light"]) {
+--bg: #16171a;
+--surface: #1d1e22;
+--text: #eeeeef;
+--muted: #9a9aa0;
+--line: #33343a;
+--accent: #7aa7e6;
+--code-bg: #24252a;
+}
+}
+:root[data-theme="dark"] {
+--bg: #16171a;
+--surface: #1d1e22;
+--text: #eeeeef;
+--muted: #9a9aa0;
+--line: #33343a;
+--accent: #7aa7e6;
+--code-bg: #24252a;
+}
+body {
+background: var(--bg);
+color: var(--text);
+font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+font-size: 16px;
+line-height: 1.65;
+max-width: 820px;
+padding: 0 28px 48px;
+}
+@media (max-width: 650px) {
+body { padding: 0 16px 40px; }
+}
+h1.title { font-size: 34px; letter-spacing: -.02em; margin-top: 10px; }
+h1, h2, h3, h4 { color: var(--text); }
+h2 { font-size: 22px; border-bottom: 1px solid var(--line); padding-bottom: 4px; }
+h3 { font-size: 18px; }
+a, a:visited { color: var(--accent); }
+pre, code { font-size: 14px; }
+pre {
+background: var(--code-bg);
+border: 1px solid var(--line);
+border-radius: 6px;
+overflow-x: auto;
+}
+code { background: var(--code-bg); color: var(--text); }
+pre code { background: transparent; }
+div.sourceCode { background: transparent; }
+table { border-color: var(--line); }
+table thead, table th { background: var(--surface); color: var(--text); }
+table td, table th { border-color: var(--line); }
+img { max-width: 100%; height: auto; background: #ffffff; }
+details { margin: 12px 0 20px; }
+summary { cursor: pointer; color: var(--accent); font-weight: 600; }
+.site-nav {
+font-size: 14px;
+padding: 20px 0 12px;
+border-bottom: 1px solid var(--line);
+margin-bottom: 8px;
+}
+.site-footer {
+color: var(--muted);
+font-size: 13px;
+border-top: 1px solid var(--line);
+margin-top: 40px;
+padding-top: 16px;
+}
+
+@media (prefers-color-scheme: dark) {
+:root:not([data-theme="light"]) code span.fu { color: #8fb4ff; }
+:root:not([data-theme="light"]) code span.cn { color: #ff9e8f; }
+:root:not([data-theme="light"]) code span.st { color: #a8d88f; }
+:root:not([data-theme="light"]) code span.co { color: #8fbcc8; }
+:root:not([data-theme="light"]) code span.kw,
+:root:not([data-theme="light"]) code span.ot,
+:root:not([data-theme="light"]) code span.cf { color: #c9a8ff; }
+:root:not([data-theme="light"]) code span.dv,
+:root:not([data-theme="light"]) code span.fl,
+:root:not([data-theme="light"]) code span.dt { color: #7fd6b6; }
+:root:not([data-theme="light"]) code span.at { color: #e6c47f; }
+:root:not([data-theme="light"]) code span.va,
+:root:not([data-theme="light"]) code span.sc { color: #e3e3e6; }
+}
+:root[data-theme="dark"] code span.fu { color: #8fb4ff; }
+:root[data-theme="dark"] code span.cn { color: #ff9e8f; }
+:root[data-theme="dark"] code span.st { color: #a8d88f; }
+:root[data-theme="dark"] code span.co { color: #8fbcc8; }
+:root[data-theme="dark"] code span.kw,
+:root[data-theme="dark"] code span.ot,
+:root[data-theme="dark"] code span.cf { color: #c9a8ff; }
+:root[data-theme="dark"] code span.dv,
+:root[data-theme="dark"] code span.fl,
+:root[data-theme="dark"] code span.dt { color: #7fd6b6; }
+:root[data-theme="dark"] code span.at { color: #e6c47f; }
+:root[data-theme="dark"] code span.va,
+:root[data-theme="dark"] code span.sc { color: #e3e3e6; }
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+<p class="site-nav"><a href="../">← simtte</a> · <a href="../../">Carlos Serra Traynor</a></p>
+
+
+<h1 class="title toc-ignore">Censoring and Realistic Assessment
+Schedules</h1>
+
+
+
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">library</span>(simtte)</span></code></pre></div>
+<p>Every simulation in <code>vignette(&quot;pkpd-time-to-event&quot;)</code> is
+administratively censored at <code>end</code> only. This vignette covers
+the rest of the assessment toolkit, layered on top of any
+already-simulated <code>$events</code>-shaped data frame
+(<code>sim_tte_ode()</code>, <code>sim_tte()</code>, or
+<code>sim_tte_df()</code> alike): independent right censoring, interval
+censoring from a visit schedule, and realistic (jittered, missed-visit,
+outcome-reactive) visit-schedule generators.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>sim_uncensored <span class="ot">&lt;-</span> <span class="fu">sim_tte_ode</span>(<span class="at">model =</span> <span class="st">&quot;exponential&quot;</span>,</span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a>  <span class="at">param =</span> <span class="fu">list</span>(<span class="at">H0 =</span> <span class="fl">0.05</span>), <span class="at">n =</span> <span class="dv">200</span>, <span class="at">end =</span> <span class="dv">30</span>, <span class="at">delta =</span> <span class="dv">2</span>, <span class="at">seed =</span> <span class="dv">1</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="co">#&gt; Building exponential_ode ... done.</span></span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="fu">table</span>(sim_uncensored<span class="sc">$</span>events<span class="sc">$</span>sim_reason)</span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a><span class="co">#&gt; administrative          event </span></span>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a><span class="co">#&gt;             37            163</span></span></code></pre></div>
+<div id="right-censoring" class="section level2">
+<h2>1. Right censoring</h2>
+<p><code>add_censoring()</code> layers a second, independent censoring
+process on top of any <code>$events</code>-shaped output, drawing a
+per-subject censoring time and taking
+<code>min(event time, censoring time, end)</code>:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>censored <span class="ot">&lt;-</span> <span class="fu">add_censoring</span>(sim_uncensored<span class="sc">$</span>events,</span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>  <span class="at">censoring =</span> <span class="fu">list</span>(<span class="at">dist =</span> <span class="st">&quot;exponential&quot;</span>, <span class="at">rate =</span> <span class="fl">0.02</span>), <span class="at">end =</span> <span class="dv">30</span>, <span class="at">seed =</span> <span class="dv">2</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a><span class="fu">table</span>(censored<span class="sc">$</span>sim_reason)</span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a><span class="co">#&gt; administrative       censored          event </span></span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a><span class="co">#&gt;             20             42            138</span></span></code></pre></div>
+<p><code>sim_status</code>/<code>sim_time</code> are updated in place
+(so any existing code reading those two columns keeps working);
+<code>sim_reason</code> records why – <code>&quot;event&quot;</code>,
+<code>&quot;censored&quot;</code> (pulled earlier by the independent draw), or
+<code>&quot;administrative&quot;</code> (hit <code>end</code>).
+<code>sim_tte_ode()</code> also accepts a <code>censoring =</code>
+argument directly, drawing inside the same seeded call as
+<code>U</code>:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>sim_censored <span class="ot">&lt;-</span> <span class="fu">sim_tte_ode</span>(<span class="at">model =</span> <span class="st">&quot;exponential&quot;</span>, <span class="at">param =</span> <span class="fu">list</span>(<span class="at">H0 =</span> <span class="fl">0.09</span>),</span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>  <span class="at">n =</span> <span class="dv">200</span>, <span class="at">end =</span> <span class="dv">30</span>, <span class="at">delta =</span> <span class="dv">2</span>,</span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>  <span class="at">censoring =</span> <span class="fu">list</span>(<span class="at">dist =</span> <span class="st">&quot;exponential&quot;</span>, <span class="at">rate =</span> <span class="fl">0.02</span>), <span class="at">seed =</span> <span class="dv">1</span>)</span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a><span class="co">#&gt; Loading model from cache.</span></span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a><span class="fu">table</span>(sim_censored<span class="sc">$</span>events<span class="sc">$</span>sim_reason)</span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a><span class="co">#&gt; administrative       censored          event </span></span>
+<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a><span class="co">#&gt;              6             31            163</span></span></code></pre></div>
+<p><code>&quot;exponential&quot;</code>, <code>&quot;weibull&quot;</code> (fixed
+<code>shape</code>, solves for <code>scale</code>),
+<code>&quot;uniform&quot;</code> (a fixed interval – the common case for
+uniform-accrual administrative censoring), <code>&quot;lognormal&quot;</code>
+(fixed <code>sdlog</code>), <code>&quot;gamma&quot;</code> (fixed
+<code>shape</code>, <code>rate</code> only), and <code>&quot;user&quot;</code>
+(any function <code>n -&gt; numeric(n)</code>) are the six
+<code>dist</code> options; see <code>?add_censoring</code>.
+<code>draw_censoring_times()</code> draws directly from any of these
+specs without needing an <code>$events</code> data frame at all, e.g. to
+check a distribution’s own shape before applying it. Censoring that
+depends on a subject’s own simulated PK/PD trajectory (informative
+dropout, e.g. driven by toxicity) is out of scope.</p>
+<div id="choosing-the-censoring-rate-for-a-target-censoring-fraction" class="section level3">
+<h3>Choosing the censoring rate for a target censoring fraction</h3>
+<p><strong><code>censoring_rate_for()</code> solves for a
+<code>dist</code> parameter (rate, scale, meanlog, or gamma rate) that
+would give a target independent-censoring fraction, estimated from the
+event times of an already-run, uncensored simulation.</strong> It is an
+approximation, not an exact calculation – the estimate depends on the
+particular uncensored run it is given, so always redraw on a larger
+cohort afterward and check the realized fraction landed close to the
+target, the way this example does:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="co"># 1. Solve: what rate gives ~20% independently censored, given this</span></span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="co">#    model&#39;s own event-time scale?</span></span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>event_times <span class="ot">&lt;-</span> sim_uncensored<span class="sc">$</span>events<span class="sc">$</span>sim_time[</span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a>  sim_uncensored<span class="sc">$</span>events<span class="sc">$</span>sim_status <span class="sc">==</span> <span class="dv">1</span>]</span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a>rate_20pct <span class="ot">&lt;-</span> <span class="fu">censoring_rate_for</span>(event_times, <span class="at">target =</span> <span class="fl">0.2</span>)</span>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a>rate_20pct</span>
+<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a><span class="co">#&gt; [1] 0.0205978</span></span>
+<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a></span>
+<span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a><span class="co"># 2. Redraw: apply that rate to a larger cohort.</span></span>
+<span id="cb5-10"><a href="#cb5-10" tabindex="-1"></a>check <span class="ot">&lt;-</span> <span class="fu">sim_tte_ode</span>(<span class="at">model =</span> <span class="st">&quot;exponential&quot;</span>, <span class="at">param =</span> <span class="fu">list</span>(<span class="at">H0 =</span> <span class="fl">0.09</span>),</span>
+<span id="cb5-11"><a href="#cb5-11" tabindex="-1"></a>  <span class="at">n =</span> <span class="dv">2000</span>, <span class="at">end =</span> <span class="dv">30</span>, <span class="at">delta =</span> <span class="dv">2</span>,</span>
+<span id="cb5-12"><a href="#cb5-12" tabindex="-1"></a>  <span class="at">censoring =</span> <span class="fu">list</span>(<span class="at">dist =</span> <span class="st">&quot;exponential&quot;</span>, <span class="at">rate =</span> rate_20pct), <span class="at">seed =</span> <span class="dv">1</span>)</span>
+<span id="cb5-13"><a href="#cb5-13" tabindex="-1"></a><span class="co">#&gt; Loading model from cache.</span></span>
+<span id="cb5-14"><a href="#cb5-14" tabindex="-1"></a></span>
+<span id="cb5-15"><a href="#cb5-15" tabindex="-1"></a><span class="co"># 3. Check: did it land close to 20%?</span></span>
+<span id="cb5-16"><a href="#cb5-16" tabindex="-1"></a><span class="fu">mean</span>(check<span class="sc">$</span>events<span class="sc">$</span>sim_reason <span class="sc">==</span> <span class="st">&quot;censored&quot;</span>)</span>
+<span id="cb5-17"><a href="#cb5-17" tabindex="-1"></a><span class="co">#&gt; [1] 0.1895</span></span></code></pre></div>
+<p>If the realized fraction in step 3 is not close enough, re-solve with
+a larger or different uncensored sample rather than trusting the first
+answer – the check is the point, not an optional extra.</p>
+</div>
+</div>
+<div id="interval-censoring" class="section level2">
+<h2>2. Interval censoring</h2>
+<p>Right censoring still gives an <em>exact</em> event time when an
+event happens. In a real trial, many endpoints (progression, response)
+are only checked at scheduled visits – an event is known to have
+happened somewhere between the last visit where the subject was
+event-free and the first visit where it was detected.
+<code>add_interval_censoring()</code> maps an already-simulated (and, if
+used, already right-censored) outcome onto that interval:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a>visits <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">15</span>, <span class="dv">20</span>, <span class="dv">25</span>, <span class="dv">30</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a>interval <span class="ot">&lt;-</span> <span class="fu">add_interval_censoring</span>(sim_censored<span class="sc">$</span>events, <span class="at">visits =</span> visits)</span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a><span class="fu">head</span>(interval[, <span class="fu">c</span>(<span class="st">&quot;ID&quot;</span>, <span class="st">&quot;sim_time&quot;</span>, <span class="st">&quot;sim_status&quot;</span>, <span class="st">&quot;sim_reason&quot;</span>,</span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a>  <span class="st">&quot;sim_time_left&quot;</span>, <span class="st">&quot;sim_time_right&quot;</span>)])</span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a><span class="co">#&gt;   ID  sim_time sim_status sim_reason sim_time_left sim_time_right</span></span>
+<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a><span class="co">#&gt; 1  1 14.734534          1      event            10             15</span></span>
+<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a><span class="co">#&gt; 2  2 10.983644          1      event            10             15</span></span>
+<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a><span class="co">#&gt; 3  3  6.190283          1      event             5             10</span></span>
+<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a><span class="co">#&gt; 4  4  1.069800          1      event             0              5</span></span>
+<span id="cb6-10"><a href="#cb6-10" tabindex="-1"></a><span class="co">#&gt; 5  5  6.278294          0   censored             5            Inf</span></span>
+<span id="cb6-11"><a href="#cb6-11" tabindex="-1"></a><span class="co">#&gt; 6  6  1.190571          1      event             0              5</span></span></code></pre></div>
+<p><code>sim_time</code>/<code>sim_status</code>/<code>sim_reason</code>
+are untouched – <code>sim_time_left</code>/ <code>sim_time_right</code>
+are added on top, so anything already reading the first three keeps
+working. <code>sim_time_right</code> is <code>Inf</code> whenever there
+is no known upper bound: a censored subject (never detected as an event
+under this schedule), or – more subtly – an event that genuinely
+happened but only <em>after</em> the subject’s last scheduled visit, so
+the schedule itself never confirmed it. <code>sim_status</code> still
+reads <code>1</code> for that second case; the exact columns are the
+simulation’s ground truth, independent of what the visit schedule
+happened to observe.</p>
+<p><strong>Order matters</strong>: apply
+<code>add_interval_censoring()</code> <em>after</em>
+<code>add_censoring()</code>, never before – a dropout changes
+<code>sim_time</code>/ <code>sim_status</code>, and the interval mapping
+needs to see the final value to know there was no assessment after the
+dropout time. <code>sim_tte_ode()</code>’s own
+<code>censoring =</code>/<code>visits =</code> arguments apply them in
+this order automatically.</p>
+<p>For a nonparametric interval-censored survival fit, convert
+<code>sim_time_right</code>’s <code>Inf</code> to <code>NA</code> (the
+<code>survival</code> package’s own convention for an open upper bound)
+and hand both bounds to
+<code>survival::Surv(..., type = &quot;interval2&quot;)</code> – this and the
+“Informative assessment schedules” chunk below are the only places in
+this vignette that need the optional <code>survival</code> package
+(<code>Suggests</code>, not <code>Imports</code>); both are skipped if
+it is not installed:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a>right_for_surv <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">is.infinite</span>(interval<span class="sc">$</span>sim_time_right), <span class="cn">NA</span>,</span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a>  interval<span class="sc">$</span>sim_time_right)</span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a>fit <span class="ot">&lt;-</span> survival<span class="sc">::</span><span class="fu">survfit</span>(survival<span class="sc">::</span><span class="fu">Surv</span>(<span class="at">time =</span> sim_time_left,</span>
+<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a>  <span class="at">time2 =</span> right_for_surv, <span class="at">type =</span> <span class="st">&quot;interval2&quot;</span>) <span class="sc">~</span> <span class="dv">1</span>,</span>
+<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a>  <span class="at">data =</span> <span class="fu">data.frame</span>(<span class="at">sim_time_left =</span> interval<span class="sc">$</span>sim_time_left,</span>
+<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a>    <span class="at">right_for_surv =</span> right_for_surv))</span>
+<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a><span class="fu">summary</span>(fit, <span class="at">times =</span> visits)</span>
+<span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a><span class="co">#&gt; Call: survfit(formula = survival::Surv(time = sim_time_left, time2 = right_for_surv, </span></span>
+<span id="cb7-9"><a href="#cb7-9" tabindex="-1"></a><span class="co">#&gt;     type = &quot;interval2&quot;) ~ 1, data = data.frame(sim_time_left = interval$sim_time_left, </span></span>
+<span id="cb7-10"><a href="#cb7-10" tabindex="-1"></a><span class="co">#&gt;     right_for_surv = right_for_surv))</span></span>
+<span id="cb7-11"><a href="#cb7-11" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb7-12"><a href="#cb7-12" tabindex="-1"></a><span class="co">#&gt;  time n.risk n.event survival std.err lower 95% CI upper 95% CI</span></span>
+<span id="cb7-13"><a href="#cb7-13" tabindex="-1"></a><span class="co">#&gt;     0    200       0   1.0000  0.0000       1.0000       1.0000</span></span>
+<span id="cb7-14"><a href="#cb7-14" tabindex="-1"></a><span class="co">#&gt;     5    116      72   0.6170  0.0355       0.5513       0.6906</span></span>
+<span id="cb7-15"><a href="#cb7-15" tabindex="-1"></a><span class="co">#&gt;    10     66      43   0.3736  0.0360       0.3093       0.4512</span></span>
+<span id="cb7-16"><a href="#cb7-16" tabindex="-1"></a><span class="co">#&gt;    15     32      24   0.2135  0.0321       0.1589       0.2868</span></span>
+<span id="cb7-17"><a href="#cb7-17" tabindex="-1"></a><span class="co">#&gt;    20     17      13   0.1210  0.0265       0.0787       0.1860</span></span>
+<span id="cb7-18"><a href="#cb7-18" tabindex="-1"></a><span class="co">#&gt;    25     13       4   0.0925  0.0238       0.0559       0.1532</span></span>
+<span id="cb7-19"><a href="#cb7-19" tabindex="-1"></a><span class="co">#&gt;    30      6       7   0.0427  0.0169       0.0197       0.0926</span></span></code></pre></div>
+<div id="left-censoring" class="section level3">
+<h3>Left censoring</h3>
+<p>An event with <code>sim_time_left == 0</code> – one that happened
+before the first post-baseline visit – is a <strong>left-censored
+observation</strong>: the event is known to have occurred before
+<code>sim_time_right</code>, with the exact time unknown.
+<code>add_interval_censoring()</code> already produces this with no
+separate mechanism:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a>ev <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">ID =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="at">sim_time =</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">15</span>, <span class="dv">25</span>),</span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a>  <span class="at">sim_status =</span> <span class="fu">c</span>(<span class="dv">1</span><span class="dt">L</span>, <span class="dv">1</span><span class="dt">L</span>, <span class="dv">0</span><span class="dt">L</span>))</span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a><span class="fu">add_interval_censoring</span>(ev, <span class="at">visits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">10</span>))</span>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a><span class="co">#&gt;   ID sim_time sim_status sim_time_left sim_time_right</span></span>
+<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a><span class="co">#&gt; 1  1        5          1             0             10</span></span>
+<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a><span class="co">#&gt; 2  2       15          1            10            Inf</span></span>
+<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a><span class="co">#&gt; 3  3       25          0            10            Inf</span></span></code></pre></div>
+<p>Subject 1’s row (<code>sim_time_left = 0</code>,
+<code>sim_time_right = 10</code>) <em>is</em> left censoring – “no lower
+bound” is exactly what <code>sim_time_left == 0</code> means. There is
+no dedicated <code>left_censor_at =</code> option: it would only ever
+rebuild, less completely, what a plain
+<code>add_interval_censoring()</code> call already gives for the whole
+cohort at once.</p>
+</div>
+<div id="delayed-entry-not-implemented" class="section level3">
+<h3>Delayed entry (not implemented)</h3>
+<p>A genuinely different concept, easy to confuse with left censoring:
+<strong>delayed entry / left truncation</strong>, where a subject is
+only observed from some entry time <code>entry &gt; 0</code> onward
+(e.g. enrollment after treatment already started), and a subject whose
+event already happened before <code>entry</code> is excluded from the
+risk set entirely rather than bounded by an interval. This changes the
+analysis dataset’s <em>shape</em> – a counting-process
+<code>survival::Surv(start, stop, event)</code> rather than a single
+time column – not just how one event is bounded, and nothing in this
+package currently represents it.</p>
+</div>
+</div>
+<div id="realistic-visit-schedules" class="section level2">
+<h2>3. Realistic visit schedules</h2>
+<p>A fixed schedule assumes every visit lands exactly on the nominal day
+and every subject attends every one. <code>visit_schedule()</code>
+builds a per-subject schedule with fixed spacing and, optionally, random
+jitter (uniform or truncated-normal); <code>thin_visits()</code> and
+<code>visit_schedule_informative()</code> layer more realistic
+visit-process randomness on top.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a>sched <span class="ot">&lt;-</span> <span class="fu">visit_schedule</span>(<span class="at">n =</span> <span class="dv">200</span>, <span class="at">every =</span> <span class="dv">4</span>, <span class="at">end =</span> <span class="dv">24</span>, <span class="at">jitter =</span> <span class="dv">1</span>, <span class="at">seed =</span> <span class="dv">1</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a><span class="fu">head</span>(sched)</span>
+<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a><span class="co">#&gt;   ID      time</span></span>
+<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a><span class="co">#&gt; 1  1  0.000000</span></span>
+<span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a><span class="co">#&gt; 2  1  3.531017</span></span>
+<span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a><span class="co">#&gt; 3  1  7.744248</span></span>
+<span id="cb9-7"><a href="#cb9-7" tabindex="-1"></a><span class="co">#&gt; 4  1 12.145707</span></span>
+<span id="cb9-8"><a href="#cb9-8" tabindex="-1"></a><span class="co">#&gt; 5  1 16.816416</span></span>
+<span id="cb9-9"><a href="#cb9-9" tabindex="-1"></a><span class="co">#&gt; 6  1 19.403364</span></span>
+<span id="cb9-10"><a href="#cb9-10" tabindex="-1"></a></span>
+<span id="cb9-11"><a href="#cb9-11" tabindex="-1"></a>sim_jittered <span class="ot">&lt;-</span> <span class="fu">sim_tte_ode</span>(<span class="at">model =</span> <span class="st">&quot;exponential&quot;</span>, <span class="at">param =</span> <span class="fu">list</span>(<span class="at">H0 =</span> <span class="fl">0.05</span>),</span>
+<span id="cb9-12"><a href="#cb9-12" tabindex="-1"></a>  <span class="at">n =</span> <span class="dv">200</span>, <span class="at">end =</span> <span class="dv">24</span>, <span class="at">delta =</span> <span class="dv">2</span>, <span class="at">visits =</span> <span class="fu">list</span>(<span class="at">every =</span> <span class="dv">4</span>, <span class="at">jitter =</span> <span class="dv">1</span>),</span>
+<span id="cb9-13"><a href="#cb9-13" tabindex="-1"></a>  <span class="at">seed =</span> <span class="dv">1</span>)</span>
+<span id="cb9-14"><a href="#cb9-14" tabindex="-1"></a><span class="co">#&gt; Loading model from cache.</span></span>
+<span id="cb9-15"><a href="#cb9-15" tabindex="-1"></a><span class="fu">head</span>(sim_jittered<span class="sc">$</span>events[, <span class="fu">c</span>(<span class="st">&quot;sim_time&quot;</span>, <span class="st">&quot;sim_status&quot;</span>, <span class="st">&quot;sim_time_left&quot;</span>,</span>
+<span id="cb9-16"><a href="#cb9-16" tabindex="-1"></a>  <span class="st">&quot;sim_time_right&quot;</span>)])</span>
+<span id="cb9-17"><a href="#cb9-17" tabindex="-1"></a><span class="co">#&gt;    sim_time sim_status sim_time_left sim_time_right</span></span>
+<span id="cb9-18"><a href="#cb9-18" tabindex="-1"></a><span class="co">#&gt; 1 24.000000          0     19.362337            Inf</span></span>
+<span id="cb9-19"><a href="#cb9-19" tabindex="-1"></a><span class="co">#&gt; 2 19.770560          1     16.435871      20.922820</span></span>
+<span id="cb9-20"><a href="#cb9-20" tabindex="-1"></a><span class="co">#&gt; 3 11.142509          1      8.895933      12.637269</span></span>
+<span id="cb9-21"><a href="#cb9-21" tabindex="-1"></a><span class="co">#&gt; 4  1.925641          1      0.000000       4.907465</span></span>
+<span id="cb9-22"><a href="#cb9-22" tabindex="-1"></a><span class="co">#&gt; 5 24.000000          0     19.835713            Inf</span></span>
+<span id="cb9-23"><a href="#cb9-23" tabindex="-1"></a><span class="co">#&gt; 6  2.143028          1      0.000000       3.694461</span></span></code></pre></div>
+<div id="missed-visits-and-assessment-dropout" class="section level3">
+<h3>Missed visits and assessment dropout</h3>
+<p><code>thin_visits()</code> reads no simulated outcome at all – it
+only thins a schedule, so it can never bias an interval-censored
+analysis (the visit process stays independent of the outcome, the
+assumption most such analyses make). Each non-baseline visit is
+independently missed with probability <code>p_miss</code>; independently
+of that, a subject may also start dropping out at a random visit and
+never return, with probability <code>p_dropout</code>:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a>realized <span class="ot">&lt;-</span> <span class="fu">thin_visits</span>(sched, <span class="at">p_miss =</span> <span class="fl">0.1</span>, <span class="at">p_dropout =</span> <span class="fl">0.05</span>, <span class="at">seed =</span> <span class="dv">2</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a><span class="fu">nrow</span>(sched) <span class="sc">-</span> <span class="fu">nrow</span>(realized) <span class="co"># visits lost to missed/dropout</span></span>
+<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a><span class="co">#&gt; [1] 156</span></span>
+<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a>out <span class="ot">&lt;-</span> <span class="fu">add_interval_censoring</span>(sim_censored<span class="sc">$</span>events, <span class="at">visits =</span> realized)</span>
+<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a><span class="fu">head</span>(out[, <span class="fu">c</span>(<span class="st">&quot;sim_time&quot;</span>, <span class="st">&quot;sim_status&quot;</span>, <span class="st">&quot;sim_time_left&quot;</span>, <span class="st">&quot;sim_time_right&quot;</span>)])</span>
+<span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a><span class="co">#&gt;    sim_time sim_status sim_time_left sim_time_right</span></span>
+<span id="cb10-7"><a href="#cb10-7" tabindex="-1"></a><span class="co">#&gt; 1 14.734534          1     12.145707      16.816416</span></span>
+<span id="cb10-8"><a href="#cb10-8" tabindex="-1"></a><span class="co">#&gt; 2 10.983644          1      8.321596      12.258228</span></span>
+<span id="cb10-9"><a href="#cb10-9" tabindex="-1"></a><span class="co">#&gt; 3  6.190283          1      4.374046       7.768207</span></span>
+<span id="cb10-10"><a href="#cb10-10" tabindex="-1"></a><span class="co">#&gt; 4  1.069800          1      0.000000       3.760070</span></span>
+<span id="cb10-11"><a href="#cb10-11" tabindex="-1"></a><span class="co">#&gt; 5  6.278294          0      3.534441            Inf</span></span>
+<span id="cb10-12"><a href="#cb10-12" tabindex="-1"></a><span class="co">#&gt; 6  1.190571          1      0.000000       3.964160</span></span></code></pre></div>
+<p><code>thin_visits()</code> also accepts a plain vector schedule
+directly, given the subject IDs to expand it across
+(<code>ids =</code>), and composes with <code>add_censoring()</code> in
+either relative order – it only ever touches the visit schedule, never
+<code>events</code>.</p>
+</div>
+<div id="informative-assessment-schedules" class="section level3">
+<h3>Informative assessment schedules</h3>
+<p><code>visit_schedule_informative()</code> is different in kind: it
+reads <code>$events</code> and lets the visit process <strong>react to
+the simulated outcome</strong> – a visit shortly before a subject’s
+event may be missed at an elevated rate (<code>miss_near_event</code>,
+e.g. “too unwell to attend”), and an unscheduled extra visit may be
+added shortly after it (<code>extra_visit_after_event</code>,
+e.g. “brought in for follow-up after a reported symptom”). This makes
+the resulting schedule <strong>informative by construction</strong> –
+whether/when a subject is assessed now depends on whether/when they had
+the event – which every function in this package says loudly, on every
+call, because it breaks the assumption most interval-censored analyses
+(including the Turnbull fit above) make about assessment timing. Use it
+to <em>study</em> that bias, not as a general visit generator:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a>rate <span class="ot">&lt;-</span> <span class="fl">0.08</span></span>
+<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a>sim_small <span class="ot">&lt;-</span> <span class="fu">sim_tte_ode</span>(<span class="at">model =</span> <span class="st">&quot;exponential&quot;</span>, <span class="at">param =</span> <span class="fu">list</span>(<span class="at">H0 =</span> rate),</span>
+<span id="cb11-3"><a href="#cb11-3" tabindex="-1"></a>  <span class="at">n =</span> <span class="dv">800</span>, <span class="at">end =</span> <span class="dv">24</span>, <span class="at">delta =</span> <span class="dv">2</span>, <span class="at">seed =</span> <span class="dv">1</span>)</span>
+<span id="cb11-4"><a href="#cb11-4" tabindex="-1"></a>base_sched <span class="ot">&lt;-</span> <span class="fu">visit_schedule</span>(<span class="at">n =</span> <span class="dv">800</span>, <span class="at">every =</span> <span class="dv">3</span>, <span class="at">end =</span> <span class="dv">24</span>, <span class="at">seed =</span> <span class="dv">1</span>)</span>
+<span id="cb11-5"><a href="#cb11-5" tabindex="-1"></a>base_sched<span class="sc">$</span>ID <span class="ot">&lt;-</span> sim_small<span class="sc">$</span>events<span class="sc">$</span>ID[base_sched<span class="sc">$</span>ID]</span>
+<span id="cb11-6"><a href="#cb11-6" tabindex="-1"></a>visit_times <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">24</span>, <span class="at">by =</span> <span class="dv">3</span>)</span>
+<span id="cb11-7"><a href="#cb11-7" tabindex="-1"></a>analytical_surv <span class="ot">&lt;-</span> <span class="fu">exp</span>(<span class="sc">-</span>rate <span class="sc">*</span> visit_times)</span>
+<span id="cb11-8"><a href="#cb11-8" tabindex="-1"></a></span>
+<span id="cb11-9"><a href="#cb11-9" tabindex="-1"></a>fit_surv <span class="ot">&lt;-</span> <span class="cf">function</span>(schedule) {</span>
+<span id="cb11-10"><a href="#cb11-10" tabindex="-1"></a>  out <span class="ot">&lt;-</span> <span class="fu">add_interval_censoring</span>(sim_small<span class="sc">$</span>events, <span class="at">visits =</span> schedule)</span>
+<span id="cb11-11"><a href="#cb11-11" tabindex="-1"></a>  right <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">is.infinite</span>(out<span class="sc">$</span>sim_time_right), <span class="cn">NA</span>, out<span class="sc">$</span>sim_time_right)</span>
+<span id="cb11-12"><a href="#cb11-12" tabindex="-1"></a>  fit <span class="ot">&lt;-</span> survival<span class="sc">::</span><span class="fu">survfit</span>(survival<span class="sc">::</span><span class="fu">Surv</span>(<span class="at">time =</span> sim_time_left, <span class="at">time2 =</span> right,</span>
+<span id="cb11-13"><a href="#cb11-13" tabindex="-1"></a>    <span class="at">type =</span> <span class="st">&quot;interval2&quot;</span>) <span class="sc">~</span> <span class="dv">1</span>,</span>
+<span id="cb11-14"><a href="#cb11-14" tabindex="-1"></a>    <span class="at">data =</span> <span class="fu">data.frame</span>(<span class="at">sim_time_left =</span> out<span class="sc">$</span>sim_time_left, <span class="at">right =</span> right))</span>
+<span id="cb11-15"><a href="#cb11-15" tabindex="-1"></a>  <span class="fu">summary</span>(fit, <span class="at">times =</span> visit_times, <span class="at">extend =</span> <span class="cn">TRUE</span>)<span class="sc">$</span>surv</span>
+<span id="cb11-16"><a href="#cb11-16" tabindex="-1"></a>}</span>
+<span id="cb11-17"><a href="#cb11-17" tabindex="-1"></a></span>
+<span id="cb11-18"><a href="#cb11-18" tabindex="-1"></a>c1_sched <span class="ot">&lt;-</span> <span class="fu">thin_visits</span>(base_sched, <span class="at">p_miss =</span> <span class="fl">0.3</span>, <span class="at">seed =</span> <span class="dv">2</span>)</span>
+<span id="cb11-19"><a href="#cb11-19" tabindex="-1"></a>c2_sched <span class="ot">&lt;-</span> <span class="fu">visit_schedule_informative</span>(base_sched, sim_small<span class="sc">$</span>events,</span>
+<span id="cb11-20"><a href="#cb11-20" tabindex="-1"></a>  <span class="at">end =</span> <span class="dv">24</span>, <span class="at">p_miss_base =</span> <span class="fl">0.1</span>, <span class="at">miss_near_event =</span> <span class="fu">list</span>(<span class="at">window =</span> <span class="dv">3</span>, <span class="at">p =</span> <span class="fl">0.9</span>),</span>
+<span id="cb11-21"><a href="#cb11-21" tabindex="-1"></a>  <span class="at">seed =</span> <span class="dv">2</span>)</span>
+<span id="cb11-22"><a href="#cb11-22" tabindex="-1"></a></span>
+<span id="cb11-23"><a href="#cb11-23" tabindex="-1"></a><span class="fu">data.frame</span>(<span class="at">time =</span> visit_times,</span>
+<span id="cb11-24"><a href="#cb11-24" tabindex="-1"></a>  <span class="at">truth =</span> <span class="fu">round</span>(analytical_surv, <span class="dv">3</span>),</span>
+<span id="cb11-25"><a href="#cb11-25" tabindex="-1"></a>  <span class="at">c1_non_informative =</span> <span class="fu">round</span>(<span class="fu">fit_surv</span>(c1_sched), <span class="dv">3</span>),</span>
+<span id="cb11-26"><a href="#cb11-26" tabindex="-1"></a>  <span class="at">c2_informative =</span> <span class="fu">round</span>(<span class="fu">fit_surv</span>(c2_sched), <span class="dv">3</span>))</span>
+<span id="cb11-27"><a href="#cb11-27" tabindex="-1"></a><span class="co">#&gt;   time truth c1_non_informative c2_informative</span></span>
+<span id="cb11-28"><a href="#cb11-28" tabindex="-1"></a><span class="co">#&gt; 1    0 1.000              1.000          1.000</span></span>
+<span id="cb11-29"><a href="#cb11-29" tabindex="-1"></a><span class="co">#&gt; 2    3 0.787              0.796          0.666</span></span>
+<span id="cb11-30"><a href="#cb11-30" tabindex="-1"></a><span class="co">#&gt; 3    6 0.619              0.623          0.576</span></span>
+<span id="cb11-31"><a href="#cb11-31" tabindex="-1"></a><span class="co">#&gt; 4    9 0.487              0.509          0.443</span></span>
+<span id="cb11-32"><a href="#cb11-32" tabindex="-1"></a><span class="co">#&gt; 5   12 0.383              0.372          0.332</span></span>
+<span id="cb11-33"><a href="#cb11-33" tabindex="-1"></a><span class="co">#&gt; 6   15 0.301              0.282          0.237</span></span>
+<span id="cb11-34"><a href="#cb11-34" tabindex="-1"></a><span class="co">#&gt; 7   18 0.237              0.220          0.209</span></span>
+<span id="cb11-35"><a href="#cb11-35" tabindex="-1"></a><span class="co">#&gt; 8   21 0.186              0.173          0.143</span></span>
+<span id="cb11-36"><a href="#cb11-36" tabindex="-1"></a><span class="co">#&gt; 9   24 0.147              0.132          0.140</span></span></code></pre></div>
+<p>At the same <em>nominal</em> miss rate (0.3 for C1’s uniform miss;
+0.1 background + 0.9 near an event for C2 – additive, not overriding: a
+near-window visit for an event subject is missed with probability
+<code>1 - (1 - p_miss_base) * (1 - p)</code>, so the two mechanisms
+compete rather than one replacing the other), C2’s estimate strays
+further from the analytical curve than C1’s – missing visits
+specifically <em>because</em> a subject is about to have the event pulls
+the estimated survival away from the truth in a way a uniform miss rate
+does not. A visit-process generator reacting to a subject’s own PK/PD
+trajectory, rather than the exact event time, is out of scope for this
+release – it would need <code>keep_trajectory = TRUE</code> and
+interpolation between reported times, the same complexity class this
+package has consistently declined to add.</p>
+</div>
+</div>
+
+<p class="site-footer">Rendered with simtte 1.1.0 (development version, GitHub f601af8) on 18 October 2026.</p>
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,114 @@
+/* Site styling layered on top of rmarkdown's vignette.css. */
+:root {
+  --bg: #fbfbfa;
+  --surface: #ffffff;
+  --text: #1d1d1f;
+  --muted: #686868;
+  --line: #dededb;
+  --accent: #2457a6;
+  --code-bg: #f3f3f1;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #16171a;
+    --surface: #1d1e22;
+    --text: #eeeeef;
+    --muted: #9a9aa0;
+    --line: #33343a;
+    --accent: #7aa7e6;
+    --code-bg: #24252a;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #16171a;
+  --surface: #1d1e22;
+  --text: #eeeeef;
+  --muted: #9a9aa0;
+  --line: #33343a;
+  --accent: #7aa7e6;
+  --code-bg: #24252a;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.65;
+  max-width: 820px;
+  padding: 0 28px 48px;
+}
+@media (max-width: 650px) {
+  body { padding: 0 16px 40px; }
+}
+
+h1.title { font-size: 34px; letter-spacing: -.02em; margin-top: 10px; }
+h1, h2, h3, h4 { color: var(--text); }
+h2 { font-size: 22px; border-bottom: 1px solid var(--line); padding-bottom: 4px; }
+h3 { font-size: 18px; }
+
+a, a:visited { color: var(--accent); }
+
+pre, code { font-size: 14px; }
+pre {
+  background: var(--code-bg);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  overflow-x: auto;
+}
+code { background: var(--code-bg); color: var(--text); }
+pre code { background: transparent; }
+div.sourceCode { background: transparent; }
+
+table { border-color: var(--line); }
+table thead, table th { background: var(--surface); color: var(--text); }
+table td, table th { border-color: var(--line); }
+
+img { max-width: 100%; height: auto; background: #ffffff; }
+
+details { margin: 12px 0 20px; }
+summary { cursor: pointer; color: var(--accent); font-weight: 600; }
+
+.site-nav {
+  font-size: 14px;
+  padding: 20px 0 12px;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 8px;
+}
+.site-footer {
+  color: var(--muted);
+  font-size: 13px;
+  border-top: 1px solid var(--line);
+  margin-top: 40px;
+  padding-top: 16px;
+}
+
+/* Readable syntax colours on the dark background (pandoc highlight classes). */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) code span.fu { color: #8fb4ff; }
+  :root:not([data-theme="light"]) code span.cn { color: #ff9e8f; }
+  :root:not([data-theme="light"]) code span.st { color: #a8d88f; }
+  :root:not([data-theme="light"]) code span.co { color: #8fbcc8; }
+  :root:not([data-theme="light"]) code span.kw,
+  :root:not([data-theme="light"]) code span.ot,
+  :root:not([data-theme="light"]) code span.cf { color: #c9a8ff; }
+  :root:not([data-theme="light"]) code span.dv,
+  :root:not([data-theme="light"]) code span.fl,
+  :root:not([data-theme="light"]) code span.dt { color: #7fd6b6; }
+  :root:not([data-theme="light"]) code span.at { color: #e6c47f; }
+  :root:not([data-theme="light"]) code span.va,
+  :root:not([data-theme="light"]) code span.sc { color: #e3e3e6; }
+}
+:root[data-theme="dark"] code span.fu { color: #8fb4ff; }
+:root[data-theme="dark"] code span.cn { color: #ff9e8f; }
+:root[data-theme="dark"] code span.st { color: #a8d88f; }
+:root[data-theme="dark"] code span.co { color: #8fbcc8; }
+:root[data-theme="dark"] code span.kw,
+:root[data-theme="dark"] code span.ot,
+:root[data-theme="dark"] code span.cf { color: #c9a8ff; }
+:root[data-theme="dark"] code span.dv,
+:root[data-theme="dark"] code span.fl,
+:root[data-theme="dark"] code span.dt { color: #7fd6b6; }
+:root[data-theme="dark"] code span.at { color: #e6c47f; }
+:root[data-theme="dark"] code span.va,
+:root[data-theme="dark"] code span.sc { color: #e3e3e6; }

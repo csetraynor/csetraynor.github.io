@@ -1,0 +1,110 @@
+---
+title: "Simulating from a Cox model"
+output: rmarkdown::html_vignette
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
+
+# Folder holding 01_route_a_design.R and 02_route_b_lung.R (set by render.R).
+cox_dir <- Sys.getenv("COX_DIR")
+
+# Run one script in full mode in a scratch folder and return its output and
+# figure path. The scripts stop() if a recovery check fails, so a failed check
+# fails the render.
+run_route <- function(script, figure) {
+  wd <- file.path(tempdir(), "cox-run")
+  dir.create(file.path(wd, "figures"), recursive = TRUE, showWarnings = FALSE)
+  file.copy(file.path(cox_dir, script), wd, overwrite = TRUE)
+  old <- setwd(wd)
+  on.exit(setwd(old))
+  out <- system2(file.path(R.home("bin"), "Rscript"), script,
+                 stdout = TRUE, stderr = TRUE, env = "COX_SMOKE=false")
+  status <- attr(out, "status")
+  if (!is.null(status) && status != 0) {
+    stop(script, " failed:\n", paste(out, collapse = "\n"))
+  }
+  list(out = out, fig = file.path(wd, "figures", figure))
+}
+```
+
+simtte simulates event times from a **hazard**. A Cox model assumes
+
+    h(t | X) = h0(t) · exp(Xβ)
+
+and deliberately leaves the baseline `h0(t)` unspecified. That's fine for
+*fitting*, because the partial likelihood never needs `h0`. It isn't fine
+for *simulating*, because you can't draw an event time without a full
+hazard. So simulating from a Cox model takes three steps:
+
+1. **Choose a baseline `h0(t)`.** Set it yourself (route A) or estimate it
+   from a reference dataset (route B).
+2. **Multiply by `exp(Xβ)`.**
+3. **Draw event times** from the resulting hazard.
+
+simtte's M-spline model provides step 1 as a flexible, smooth baseline, and
+its `covariates` / `beta` arguments provide step 2:
+
+    sim_tte_ode(model = "mspline")  hazard = exp(mu + lp) · Σ_m coefs[m] · M_m(t)
+                                     └── h0(t) = exp(mu) · Σ coefs · M(t)
+                                     └── lp = Xβ  (from covariates / beta)
+
+Proportional hazards holds by construction, so `coxph()` fitted to the
+simulated data estimates `β`. That's the equivalence these scripts check.
+Note that this isn't a Cox partial likelihood run backwards: it simulates
+the **data-generating process** that a Cox model assumes.
+
+## Route A: you set the truth
+
+Three hand-picked baseline shapes (flat, increasing, bathtub), a treatment
+effect `β = −0.5`, simulate, check that `coxph()` recovers `β` and that the
+Kaplan–Meier curves match the analytical `S(t | x)`. The full run adds a
+200-replicate bias and coverage check.
+
+<details>
+<summary>Show the script (01_route_a_design.R)</summary>
+
+```{r route-a-code, eval = FALSE, code = readLines(file.path(cox_dir, "01_route_a_design.R"))}
+```
+
+</details>
+
+```{r route-a-run, echo = FALSE}
+route_a <- run_route("01_route_a_design.R", "route_a_km_vs_truth.png")
+writeLines(route_a$out)
+```
+
+```{r route-a-fig, echo = FALSE, out.width = "100%", fig.alt = "Kaplan-Meier curves by arm against the analytical survival, for three baseline shapes"}
+knitr::include_graphics(route_a$fig)
+```
+
+## Route B: estimate from `survival::lung`, then simulate
+
+Fit an M-spline proportional-hazards model to `survival::lung` (sex effect)
+by maximum likelihood **on simtte's own basis**, check it against
+`coxph()`, then simulate a new cohort from the fit and check the round trip.
+
+<details>
+<summary>Show the script (02_route_b_lung.R)</summary>
+
+```{r route-b-code, eval = FALSE, code = readLines(file.path(cox_dir, "02_route_b_lung.R"))}
+```
+
+</details>
+
+```{r route-b-run, echo = FALSE}
+route_b <- run_route("02_route_b_lung.R", "route_b_lung_fit.png")
+writeLines(route_b$out)
+```
+
+```{r route-b-fig, echo = FALSE, out.width = "100%", fig.alt = "Left: lung Kaplan-Meier curves against the fitted model. Right: a simulated cohort against the fit"}
+knitr::include_graphics(route_b$fig)
+```
+
+## Which route when
+
+- **Route A: design and power.** You decide the truth (baseline shape and
+  effect size) and ask what a trial would see.
+- **Route B: mimic a real dataset.** You want new cohorts that look like an
+  observed one, for example to try a different effect size, sample size or
+  covariate mix against a realistic baseline.
