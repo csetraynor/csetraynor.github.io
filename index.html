@@ -3,22 +3,22 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Personal research site of Carlos Serra Traynor — Bayesian modelling, pharmacometrics, and AI/ML research, software, and publications.">
+  <meta name="description" content="Personal research site of Carlos Serra Traynor: Bayesian modelling, pharmacometrics and AI/ML research, open-source software and publications.">
   <meta name="color-scheme" content="light dark">
   <link rel="canonical" href="https://csetraynor.github.io/">
-  <title>Carlos Serra Traynor — Quantitative Scientist</title>
+  <title>Carlos Serra Traynor | Quantitative Scientist</title>
 
   <!-- Open Graph -->
   <meta property="og:type" content="profile">
-  <meta property="og:title" content="Carlos Serra Traynor — Quantitative Scientist">
-  <meta property="og:description" content="Bayesian modelling, pharmacometrics, and AI/ML research, software, and publications.">
+  <meta property="og:title" content="Carlos Serra Traynor | Quantitative Scientist">
+  <meta property="og:description" content="Personal research site of Carlos Serra Traynor: Bayesian modelling, pharmacometrics and AI/ML research, open-source software and publications.">
   <meta property="og:url" content="https://csetraynor.github.io/">
   <meta property="og:site_name" content="Carlos Serra Traynor">
 
   <!-- Twitter -->
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Carlos Serra Traynor — Quantitative Scientist">
-  <meta name="twitter:description" content="Bayesian modelling, pharmacometrics, and AI/ML research, software, and publications.">
+  <meta name="twitter:title" content="Carlos Serra Traynor | Quantitative Scientist">
+  <meta name="twitter:description" content="Personal research site of Carlos Serra Traynor: Bayesian modelling, pharmacometrics and AI/ML research, open-source software and publications.">
   <meta name="twitter:site" content="@CSerra91">
 
   <script type="application/ld+json">
@@ -233,11 +233,12 @@
 
   <main id="main" class="wrap">
     <div class="hero">
-      <p class="eyebrow">Quantitative Science · Bayesian Modelling · AI &amp; Machine Learning</p>
+      <p class="eyebrow">Quantitative Science · Pharmacometrics · Bayesian Modelling · AI &amp; Machine Learning</p>
       <h1>Building Bayesian intelligence for better decisions.</h1>
       <p class="lead">
-        Research spanning Bayesian modelling, biotechnology, and AI/ML, 
-        focused on quantitative methods for decision-making under uncertainty.
+        Research spanning Bayesian modelling, biotechnology and AI/ML,
+        grounded in clinical pharmacology and pharmacometrics and focused on
+        decisions under uncertainty.
       </p>
       <div class="hero-links">
         <a href="https://github.com/csetraynor" rel="me noopener" target="_blank">GitHub ↗</a>
@@ -250,23 +251,26 @@
       <h2 id="about-heading">About</h2>
       <div class="prose">
         <p>
-          I'm a quantitative scientist working on Bayesian modelling and
-          model-informed decision-making in complex biological systems. Over
-          the past several years I've built predictive models supporting
-          clinical development, dose optimisation, translational medicine, and
-          regulatory submissions, mostly in oncology.
+          I'm a quantitative scientist grounded in clinical pharmacology and
+          pharmacometrics. I build Bayesian and mechanistic models for
+          questions where the data are sparse or noisy and a decision still
+          has to be made: which dose to test, how a trial will behave before
+          it runs, or whether a survival signal holds up.
         </p>
         <p>
-          My work combines Bayesian inference, nonlinear mixed-effects
-          modelling, simulation, and statistical computing to make decisions
-          under uncertainty more rigorous. The aim is to turn noisy clinical
-          and biological data into evidence that holds up under scrutiny.
+          Most of that work combines nonlinear mixed-effects models,
+          exposure-response and time-to-event analysis, multistate and joint
+          models, and simulation. I fit them in Stan, Torsten, NONMEM and R,
+          and I release the reusable parts as open-source R packages so
+          others can check and extend them.
         </p>
         <p>
-          My interests are increasingly moving beyond drug development into
-          probabilistic machine learning and quantitative research more
-          broadly. I'm applying the same computational habits to problems
-          outside pharma, including AI-assisted software development.
+          I'm now working more on probabilistic machine learning inside
+          pharmacometric models, and exploring projection predictive variable
+          selection for survival models with
+          <a href="https://github.com/stan-dev/projpred" rel="noopener" target="_blank">projpred</a>.
+          The same computational habits carry over to quantitative problems
+          outside drug development, and to AI-assisted software development.
         </p>
       </div>
     </section>
@@ -276,8 +280,8 @@
       <div class="work-list">
         <div class="work-item">
           <h3>simtte</h3>
-          <a class="work-link" href="https://github.com/csetraynor/simtte" rel="noopener" target="_blank">GitHub ↗</a>
-          <p>R package for simulating bespoke time-to-event data (Weibull and spline hazards), for trial design and endpoint simulation.</p>
+          <span class="work-link"><a href="simtte/">Examples</a> · <a href="https://CRAN.R-project.org/package=simtte" rel="noopener" target="_blank">CRAN ↗</a> · <a href="https://github.com/csetraynor/simtte" rel="noopener" target="_blank">GitHub ↗</a></span>
+          <p>R package that extends mrgsolve for time-to-event simulation, with Weibull and M-spline baseline hazards, for trial design and endpoint simulation.</p>
         </div>
         <div class="work-item">
           <h3>StanFlowR</h3>
@@ -285,46 +289,28 @@
           <p>R package that orchestrates Stan and Torsten model workflows through the native CmdStan CLI, so Bayesian pharmacometric models can run on HPC and cloud compute without <code>cmdstanr</code> or <code>rstan</code>.</p>
         </div>
         <div class="work-item">
-          <h3>gcsf-neutropenia-kpd-model</h3>
-          <a class="work-link" href="https://github.com/csetraynor/gcsf-neutropenia-kpd-model" rel="noopener" target="_blank">GitHub ↗</a>
-          <p>Bayesian kinetic-pharmacodynamic Stan/Torsten models of neutrophil dynamics under docetaxel chemotherapy, with and without G-CSF support, presented at PAGE 2026.</p>
-        </div>
-        <div class="work-item">
-          <h3>Bayes-Joint-Model-ctDNA-PFS</h3>
-          <a class="work-link" href="https://github.com/csetraynor/Bayes-Joint-Model-ctDNA-PFS" rel="noopener" target="_blank">GitHub ↗</a>
-          <p>Stan/mrgsolve code for the joint longitudinal–survival model behind a 2024 <em>Clinical Pharmacology &amp; Therapeutics</em> paper predicting disease progression from ctDNA in EGFR-mutant NSCLC.</p>
-        </div>
-        <div class="work-item">
-          <h3>miml-synthetic</h3>
-          <a class="work-link" href="https://github.com/csetraynor/miml-synthetic" rel="noopener" target="_blank">GitHub ↗</a>
-          <p>Code for a comparative study of missing-data imputation methods (predictive mean matching, EM, random forests, GANs, tabular networks) on real-world biomarker data.</p>
+          <h3>erSCM</h3>
+          <a class="work-link" href="https://github.com/csetraynor/erSCM" rel="noopener" target="_blank">GitHub ↗</a>
+          <p>R package for exposure-response analysis with stepwise covariate modelling. It automates common exposure-response steps and produces report-ready outputs. In development.</p>
         </div>
       </div>
-      <p class="contrib-note">I also contribute to open-source pharmacometrics tools, including forks of <a href="https://github.com/metrumresearchgroup/Torsten" rel="noopener" target="_blank">Torsten</a>, <a href="https://github.com/metrumresearchgroup/mrgsolve" rel="noopener" target="_blank">mrgsolve</a>, and <a href="https://github.com/stan-dev/projpred" rel="noopener" target="_blank">projpred</a>.</p>
+      <p class="contrib-note">I've also contributed to <a href="https://github.com/metrumresearchgroup/Torsten" rel="noopener" target="_blank">Torsten</a>, extending it for multistate models and simplifying its user guide. simtte builds on <a href="https://github.com/metrumresearchgroup/mrgsolve" rel="noopener" target="_blank">mrgsolve</a>.</p>
     </section>
 
     <section id="publications" aria-labelledby="publications-heading">
-      <h2 id="publications-heading">Selected publications</h2>
+      <h2 id="publications-heading">Publications &amp; talks</h2>
 
       <div class="publication">
-        <div class="pub-title">Imputing Biomarker Status from RWE Datasets—A Comparative Study</div>
-        <div class="pub-meta">Traynor C, Sahota T, Tomkinson H, Gonzalez-Garcia I, Evans N, Chappell M · Journal of Personalized Medicine · 2021 · 11(12):1356</div>
-        <a class="pub-link" href="https://doi.org/10.3390/jpm11121356" rel="noopener" target="_blank">doi.org/10.3390/jpm11121356 ↗</a>
+        <div class="pub-title">Full Bayesian multistate models in pharmacometrics</div>
+        <div class="pub-meta">Serra Traynor, C., et al. · Pharmacokinetics UK · 2019</div>
       </div>
 
       <div class="publication">
-        <div class="pub-title">Longitudinal Circulating Tumor DNA Modeling to Predict Disease Progression in First-Line Mutant EGFR Non-Small Cell Lung Cancer</div>
-        <div class="pub-meta">Johnson M, Serra Traynor C, Vishwanathan K, Overend P, Hartmaier R, Markovets A, Chmielecki J, Mugundu GM, Barrett JC, Tomkinson H, Ramalingam SS · Clinical Pharmacology &amp; Therapeutics · 2024 · 115(2):349–360</div>
-        <a class="pub-link" href="https://doi.org/10.1002/cpt.3113" rel="noopener" target="_blank">doi.org/10.1002/cpt.3113 ↗</a>
+        <div class="pub-title">Elastic net applications to target sourcing in metastatic breast cancer</div>
+        <div class="pub-meta">Serra Traynor, C., et al. · WIN Symposium · 2018 · Poster</div>
       </div>
 
-      <div class="publication">
-        <div class="pub-title">DeepCIM: Prediction of Myelosuppressive Anti-Cancer Molecules Using Drug–Target Interaction Datasets</div>
-        <div class="pub-meta">Lee T, Thomas P, Serra Traynor C · PAGE 32 (2024) · Abstract 11108</div>
-        <a class="pub-link" href="https://www.page-meeting.org/wp-content/uploads/pdf_abstracts/11108-abstract.pdf" rel="noopener" target="_blank">Abstract PDF ↗</a>
-      </div>
-
-      <p class="pub-note">Full record: <a href="https://scholar.google.com/citations?user=WjwRvO8AAAAJ&amp;hl=en" rel="noopener" target="_blank">Google Scholar ↗</a> · <a href="https://orcid.org/0000-0002-3753-7552" rel="noopener" target="_blank">ORCID ↗</a></p>
+      <p class="pub-note">Full list of papers and abstracts: <a href="https://scholar.google.com/citations?user=WjwRvO8AAAAJ&amp;hl=en" rel="noopener" target="_blank">Google Scholar ↗</a> · <a href="https://orcid.org/0000-0002-3753-7552" rel="noopener" target="_blank">ORCID ↗</a></p>
     </section>
 
     <section id="skills" aria-labelledby="skills-heading">
@@ -340,11 +326,24 @@
           </div>
         </div>
         <div class="skill-group">
-          <h3>Nonlinear mixed-effects &amp; survival modelling</h3>
+          <h3>Pharmacometric &amp; survival modelling</h3>
           <div class="pill-list">
             <span class="pill">PK/PD</span>
             <span class="pill">NLME</span>
+            <span class="pill">Exposure-response</span>
+            <span class="pill">PBPK</span>
+            <span class="pill">MIDD</span>
             <span class="pill">Time-to-event models</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <h3>Pharmacometric software</h3>
+          <div class="pill-list">
+            <span class="pill">NONMEM</span>
+            <span class="pill">Monolix</span>
+            <span class="pill">Phoenix NLME</span>
+            <span class="pill">PsN</span>
+            <span class="pill">Pirana</span>
             <span class="pill">mrgsolve</span>
           </div>
         </div>
@@ -357,12 +356,17 @@
           </div>
         </div>
         <div class="skill-group">
-          <h3>R package development, Python, Unix</h3>
+          <h3>Programming &amp; computing</h3>
           <div class="pill-list">
             <span class="pill">R</span>
+            <span class="pill">R Shiny</span>
             <span class="pill">Python</span>
+            <span class="pill">Bash</span>
+            <span class="pill">Git</span>
             <span class="pill">Unix</span>
             <span class="pill">CmdStan / HPC workflows</span>
+            <span class="pill">AWS (Metworx)</span>
+            <span class="pill">HPC Midlands+</span>
           </div>
         </div>
         <div class="skill-group">
@@ -370,6 +374,7 @@
           <div class="pill-list">
             <span class="pill">Machine learning</span>
             <span class="pill">Probabilistic ML</span>
+            <span class="pill">Neural networks</span>
             <span class="pill">AI-assisted software development</span>
           </div>
         </div>
@@ -380,9 +385,10 @@
       <h2 id="background-heading">Background</h2>
       <div class="prose">
         <p>PhD, Engineering for Medical Science and Technology — University of Warwick</p>
-        <p>Pharmacy (MPharm) — University of Barcelona</p>
+        <p>Grado/Licenciatura en Farmacia (Master's level, Bologna framework; MPharm equivalent) — University of Barcelona</p>
         <p>Reviewer for the <a href="https://joss.theoj.org" rel="noopener" target="_blank">Journal of Open Source Software</a> (JOSS)</p>
-        <p>Member of the <a href="https://www.go-isop.org" rel="noopener" target="_blank">International Society of Pharmacometrics</a> (ISoP)</p>
+        <p>Reviewer for <a href="https://journal.r-project.org" rel="noopener" target="_blank">The R Journal</a></p>
+        <p>AI-ML SIG member, <a href="https://www.go-isop.org" rel="noopener" target="_blank">International Society of Pharmacometrics</a> (ISoP)</p>
       </div>
     </section>
 
